@@ -1,0 +1,417 @@
+# FJ-Royal12
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>FJ Royal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:#07070e;color:#fff;font-family:Arial,sans-serif;overflow-x:hidden}
+.pg{display:none;min-height:100vh;padding:16px;flex-direction:column;align-items:center;justify-content:center}
+.card{background:#111120;border:1px solid #222244;border-radius:16px;padding:20px 16px;width:100%;max-width:380px}
+.logo{font-size:26px;font-weight:900;color:#4fc3f7;text-align:center;margin-bottom:4px}
+.sub{text-align:center;color:#444466;font-size:11px;margin-bottom:16px}
+input[type=text]{width:100%;background:#1a1a2e;border:1px solid #333355;border-radius:10px;padding:12px 14px;color:#fff;font-size:15px;margin-bottom:10px;outline:none;display:block;-webkit-appearance:none}
+input::placeholder{color:#444}
+.btn{display:block;width:100%;border:none;border-radius:10px;padding:14px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:8px;text-align:center;-webkit-appearance:none;touch-action:manipulation}
+.bp{background:#6c63ff}
+.bg{background:#00b894}
+.bd{background:#1a1a2e;border:1px solid #333355;color:#aaa}
+.row2{display:flex;gap:8px;margin-bottom:8px}
+.mc{flex:1;padding:12px 6px;background:#1a1a2e;border:2px solid #333355;border-radius:10px;cursor:pointer;text-align:center;font-size:13px;font-weight:700;color:#7070a0;touch-action:manipulation}
+.mc.oc{border-color:#00b894;color:#00e5a0;background:#0d2420}
+.mc.ov{border-color:#ff4444;color:#ff6b6b;background:#2a1010}
+.jcard{border:2px solid #333355;border-radius:10px;padding:10px;cursor:pointer;background:#1a1a2e;margin-bottom:8px;display:flex;align-items:center;gap:10px;touch-action:manipulation}
+.jcard.on{border-color:#4fc3f7;background:#0d1f2e}
+.prow{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#1a1a2e;border-radius:8px;margin-bottom:5px;font-size:13px}
+.lcbox{background:#0d0d18;border-radius:8px;padding:6px 8px;min-height:36px;max-height:60px;overflow-y:auto;margin-bottom:6px;font-size:11px;color:#aaa}
+.codebox{background:#0d1f2e;border:1px solid #4fc3f7;border-radius:10px;padding:12px;margin-bottom:10px;text-align:center;display:none}
+.codetxt{font-size:34px;font-weight:900;letter-spacing:8px;color:#4fc3f7;margin:4px 0}
+#gp{display:none;flex-direction:column;align-items:center;width:100%;height:100vh;overflow:hidden}
+#cv{display:block;touch-action:none}
+#vbar{position:fixed;top:40px;right:4px;z-index:99}
+.vi{background:rgba(0,0,0,.8);border:1px solid #222;border-radius:6px;padding:2px 6px;font-size:10px;color:#555;margin-bottom:2px;display:flex;align-items:center;gap:3px}
+.vi.tk{border-color:#00e5a0;color:#00e5a0}
+.vdot{width:5px;height:5px;border-radius:50%;background:#333;flex-shrink:0}
+.vdot.on{background:#00e5a0}
+#hud{width:100%;max-width:480px;background:#0c0c18;padding:4px 8px 6px;flex-shrink:0}
+#gfeed{font-size:11px;color:#aaa;height:20px;overflow:hidden;margin-bottom:3px}
+#gcrow{display:flex;gap:5px;margin-bottom:4px}
+#gcin{flex:1;background:#1a1a2e;border:1px solid #333;border-radius:7px;padding:5px 8px;color:#fff;font-size:12px;outline:none}
+#gcsend{background:#6c63ff;border:none;border-radius:7px;padding:5px 10px;color:#fff;font-weight:700;font-size:12px;cursor:pointer;touch-action:manipulation}
+#gctrl{display:flex;justify-content:space-between;align-items:center}
+#joy{width:80px;height:80px;border-radius:50%;background:rgba(108,99,255,.15);border:2px solid rgba(108,99,255,.5);font-size:26px;display:flex;align-items:center;justify-content:center;touch-action:none;user-select:none;flex-shrink:0}
+#firebtn{width:80px;height:80px;border-radius:50%;background:rgba(255,50,50,.2);border:2px solid #ff4444;font-size:26px;display:flex;align-items:center;justify-content:center;touch-action:none;user-select:none;flex-shrink:0}
+#ginfo2{text-align:center}
+.srow{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#1a1a2e;border-radius:8px;margin-bottom:5px}
+</style>
+</head>
+<body>
+
+<!-- MENU -->
+<div class="pg" id="p1" style="display:flex">
+<div class="card">
+  <div class="logo">✈️ FJ Royal</div>
+  <div class="sub">Online Multiplayer • Voice Chat • VS & Co-op<br>by Radwan Islam Alif</div>
+  <input type="text" id="nm" placeholder="আপনার নাম লিখুন" maxlength="12">
+  <div class="row2">
+    <div class="mc oc" id="btnC">🤝 Co-op</div>
+    <div class="mc" id="btnV">⚔️ VS</div>
+  </div>
+  <button class="btn bp" id="hostBtn">🏠 Room তৈরি করুন</button>
+  <div class="row2">
+    <input type="text" id="jcode" placeholder="Room Code" maxlength="6" style="margin-bottom:0;flex:1;text-transform:uppercase">
+    <button class="btn bg" id="joinBtn" style="width:auto;padding:14px 16px;margin-bottom:0;flex-shrink:0">Join</button>
+  </div>
+  <div id="err1" style="color:#ff6b6b;font-size:13px;text-align:center;margin-top:6px;display:none"></div>
+  <button class="btn bd" id="credBtn" style="margin-top:8px">🏆 Credits</button>
+</div>
+</div>
+
+<!-- JET SELECT -->
+<div class="pg" id="p2">
+<div class="card">
+  <div class="logo" style="font-size:20px">✈️ জেট বাছুন</div>
+  <div id="banner" style="text-align:center;margin:10px 0;padding:8px;border-radius:8px;font-size:13px"></div>
+  <div id="jetlist"></div>
+  <button class="btn bp" id="nextBtn">✅ এই জেট নিয়ে যাও</button>
+  <button class="btn bd" id="back1Btn">← ফিরে যাও</button>
+</div>
+</div>
+
+<!-- LOBBY -->
+<div class="pg" id="p3">
+<div class="card">
+  <div class="logo" style="font-size:20px">🏠 Lobby</div>
+  <div id="lmodeinfo" style="margin-bottom:8px;padding:8px 12px;border-radius:8px;font-size:13px"></div>
+  <div id="vstat" style="padding:8px;border-radius:8px;margin-bottom:8px;font-size:12px;background:#1a0a0a;color:#ff8080">🔇 মাইক লোড হচ্ছে...</div>
+  <div id="lstat" style="text-align:center;padding:6px;border-radius:8px;margin-bottom:8px;font-size:13px;background:#1a1a2e">⏳ সংযোগ হচ্ছে...</div>
+  <div class="codebox" id="codeshow">
+    <div style="font-size:11px;color:#5070a0">📋 বন্ধুকে এই Code দিন</div>
+    <div class="codetxt" id="codenum">------</div>
+    <div id="codestat" style="font-size:11px;color:#5070a0">⏳ বন্ধুর অপেক্ষা...</div>
+  </div>
+  <div style="font-size:11px;color:#5050a0;margin-bottom:5px" id="pcnt">খেলোয়াড় (0/3)</div>
+  <div id="playerlist"></div>
+  <div class="lcbox" id="lobbychat"></div>
+  <div class="row2" style="margin-bottom:8px">
+    <input type="text" id="lchatinp" placeholder="Chat..." style="margin-bottom:0;flex:1">
+    <button class="btn bp" id="lsendBtn" style="width:auto;padding:10px 12px;margin-bottom:0;flex-shrink:0">➤</button>
+  </div>
+  <button class="btn bg" id="startBtn" style="display:none">🚀 গেম শুরু করুন!</button>
+  <div id="waitmsg" style="display:none;text-align:center;color:#5050a0;font-size:13px;padding:8px">⏳ Host এর অপেক্ষায়...</div>
+</div>
+</div>
+
+<!-- GAME -->
+<div id="gp">
+  <canvas id="cv"></canvas>
+  <div id="vbar"></div>
+  <div id="hud">
+    <div id="gfeed">চ্যাট এখানে দেখাবে</div>
+    <div id="gcrow">
+      <input id="gcin" type="text" placeholder="Chat...">
+      <button id="gcsend">➤</button>
+    </div>
+    <div id="gctrl">
+      <div id="joy">🕹️</div>
+      <div id="ginfo2">
+        <div id="lvltxt" style="font-size:12px;font-weight:700;color:#4fc3f7">Level 1</div>
+        <div id="tktxt" style="font-size:10px;color:#444">🔇</div>
+        <div style="font-size:9px;color:#222">Radwan Islam Alif</div>
+      </div>
+      <div id="firebtn">🔥</div>
+    </div>
+  </div>
+</div>
+
+<!-- OVER -->
+<div class="pg" id="p5">
+<div class="card">
+  <div class="logo" style="font-size:24px">🏁 গেম শেষ!</div>
+  <div id="overres" style="text-align:center;font-size:20px;margin:10px 0;font-weight:800;color:#ffcc00"></div>
+  <div id="overscores" style="margin-bottom:12px"></div>
+  <div style="text-align:center;font-size:11px;color:#333;margin-bottom:10px">© 2025 Radwan Islam Alif</div>
+  <button class="btn bp" id="resetBtn">🔄 আবার খেলুন</button>
+</div>
+</div>
+
+<!-- CREDITS -->
+<div class="pg" id="p6">
+<div class="card">
+  <div class="logo" style="font-size:22px">🏆 Credits</div>
+  <div style="background:#0d1a2e;border:1px solid #6c63ff;border-radius:12px;padding:16px;margin:12px 0;text-align:center">
+    <div style="font-size:36px;margin-bottom:6px">👨‍💻</div>
+    <div style="font-size:11px;color:#7070a0;letter-spacing:2px;margin-bottom:4px">GAME DEVELOPER</div>
+    <div style="font-size:20px;font-weight:900;color:#4fc3f7">Radwan Islam Alif</div>
+    <div style="font-size:12px;color:#5050a0;margin-top:4px">ARO AI · Smart Chat AI · FJ Royal</div>
+  </div>
+  <div style="text-align:center;font-size:11px;color:#333;margin-bottom:12px">© 2025 Radwan Islam Alif</div>
+  <button class="btn bp" id="back2Btn">← ফিরে যাও</button>
+</div>
+</div>
+
+<script>
+// ══ DATA ══
+var JETS={
+  "F-22 Raptor":   {c:"#4fc3f7",a:"#0288d1",spd:5,hp:120,fr:15},
+  "F-35 Lightning":{c:"#81c784",a:"#2e7d32",spd:4,hp:150,fr:20},
+  "Su-57 Felon":   {c:"#ef9a9a",a:"#b71c1c",spd:6,hp:100,fr:12},
+  "F-16 Falcon":   {c:"#fff176",a:"#f57f17",spd:7,hp:90, fr:10},
+  "MiG-29 Fulcrum":{c:"#ce93d8",a:"#6a1b9a",spd:6,hp:110,fr:13}
+};
+var JN=Object.keys(JETS);
+var LVL=[{n:3,s:1.5,h:30},{n:5,s:2,h:50},{n:7,s:2.5,h:70},{n:9,s:3,h:90},{n:12,s:3.5,h:120}];
+var myName="",myJet=0,mode="coop",isHost=false,rCode="",jCode="";
+var ch=null,players=[],G=null,anim=null,bgX=0;
+var keys={},touch={dx:0,dy:0,f:false},joyActive=false,joyBase={x:0,y:0};
+var lStream=null,peerConns={},isTalk=false,whoTalk={};
+var cv=document.getElementById("cv"),cx=cv.getContext("2d");
+var W=Math.min(window.innerWidth,480),H=400;
+
+// ══ PAGE ══
+function showPg(id){
+  ["p1","p2","p3","p5","p6"].forEach(function(i){
+    var el=document.getElementById(i);
+    if(el) el.style.display="none";
+  });
+  var gp=document.getElementById("gp");
+  if(gp) gp.style.display="none";
+  var el=document.getElementById(id);
+  if(!el) return;
+  if(id==="gp"){el.style.display="flex";resizeCV();}
+  else el.style.display="flex";
+}
+
+// ══ BIND ALL BUTTONS ══
+function tap(id,fn){
+  var el=document.getElementById(id);
+  if(!el) return;
+  el.addEventListener("touchend",function(e){e.preventDefault();fn();});
+  el.addEventListener("click",function(e){fn();});
+}
+
+// ══ INIT ══
+document.addEventListener("DOMContentLoaded",function(){
+  tap("hostBtn", hostClick);
+  tap("joinBtn", joinClick);
+  tap("credBtn", function(){showPg("p6");});
+  tap("nextBtn", nextClick);
+  tap("back1Btn", function(){showPg("p1");});
+  tap("startBtn", startGame);
+  tap("lsendBtn", sendLChat);
+  tap("gcsend",   sendGChat);
+  tap("resetBtn", resetGame);
+  tap("back2Btn", function(){showPg("p1");});
+  tap("btnC",     function(){selMode("coop");});
+  tap("btnV",     function(){selMode("vs");});
+
+  document.getElementById("lchatinp").addEventListener("keydown",function(e){if(e.key==="Enter")sendLChat();});
+  document.getElementById("gcin").addEventListener("keydown",function(e){if(e.key==="Enter")sendGChat();});
+
+  setupControls();
+});
+
+// ══ MODE ══
+function selMode(m){
+  mode=m;
+  document.getElementById("btnC").className="mc"+(m==="coop"?" oc":"");
+  document.getElementById("btnV").className="mc"+(m==="vs"?" ov":"");
+}
+
+// ══ MENU ══
+function hostClick(){
+  var n=document.getElementById("nm").value.trim();
+  if(!n){showErr("নাম লিখুন!");return;}
+  myName=n; isHost=true; buildJets(); buildBanner(); showPg("p2");
+}
+
+function joinClick(){
+  var n=document.getElementById("nm").value.trim();
+  var c=document.getElementById("jcode").value.trim().toUpperCase();
+  if(!n){showErr("নাম লিখুন!");return;}
+  if(!c){showErr("Room Code দিন!");return;}
+  myName=n; jCode=c; isHost=false; buildJets(); buildBanner(); showPg("p2");
+}
+
+function showErr(msg){
+  var e=document.getElementById("err1");
+  e.textContent="❌ "+msg; e.style.display="block";
+  setTimeout(function(){e.style.display="none";},2500);
+}
+
+// ══ JETS ══
+function buildJets(){
+  var el=document.getElementById("jetlist"); el.innerHTML="";
+  for(var i=0;i<JN.length;i++){
+    var name=JN[i],j=JETS[name];
+    var d=document.createElement("div");
+    d.className="jcard"+(i===myJet?" on":"");
+    d.innerHTML='<div style="width:32px;height:32px;border-radius:50%;background:'+j.a+'44;border:2px solid '+j.c+';display:flex;align-items:center;justify-content:center">✈️</div>'
+      +'<div style="flex:1"><b style="color:'+j.c+';font-size:13px">'+name+'</b><br>'
+      +'<span style="font-size:11px;color:#666">⚡'+j.spd+' ❤️'+j.hp+' 🔥'+(21-j.fr)+'</span></div>'
+      +(i===myJet?'<span style="color:'+j.c+'">✅</span>':'');
+    (function(idx){
+      d.addEventListener("touchend",function(e){e.preventDefault();myJet=idx;buildJets();});
+      d.addEventListener("click",function(){myJet=idx;buildJets();});
+    })(i);
+    el.appendChild(d);
+  }
+}
+
+function buildBanner(){
+  var b=document.getElementById("banner");
+  if(mode==="vs"){b.style.cssText="background:#2a1010;border:1px solid #ff4444;color:#ff6b6b";b.textContent="⚔️ VS Mode — বন্ধুর বিরুদ্ধে!";}
+  else{b.style.cssText="background:#0d2420;border:1px solid #00b894;color:#00e5a0";b.textContent="🤝 Co-op — একসাথে লেভেল পার!";}
+}
+
+function nextClick(){
+  showPg("p3"); buildLobbyMode(); startMic(); loadAbly();
+}
+
+// ══ LOBBY ══
+function buildLobbyMode(){
+  var el=document.getElementById("lmodeinfo");
+  if(mode==="vs"){el.style.cssText="background:#2a1010;border:1px solid #ff4444;border-radius:8px;color:#ff6b6b";el.innerHTML="⚔️ <b>VS Mode</b> — বন্ধুর বিরুদ্ধে";}
+  else{el.style.cssText="background:#0d2420;border:1px solid #00b894;border-radius:8px;color:#00e5a0";el.innerHTML="🤝 <b>Co-op</b> — একসাথে লেভেল পার";}
+}
+
+// ══ MIC ══
+function startMic(){
+  if(!navigator.mediaDevices){setVS(false,"মাইক নেই");return;}
+  navigator.mediaDevices.getUserMedia({audio:true,video:false})
+  .then(function(s){
+    lStream=s; setVS(true,"✅ মাইক চালু!");
+    var ac=new(window.AudioContext||window.webkitAudioContext)();
+    var src=ac.createMediaStreamSource(s),an=ac.createAnalyser();
+    an.fftSize=256; src.connect(an);
+    var arr=new Uint8Array(an.frequencyBinCount);
+    function vad(){
+      an.getByteFrequencyData(arr);
+      var v=0;for(var i=0;i<arr.length;i++)v+=arr[i];v/=arr.length;
+      var t=v>15;
+      if(t!==isTalk){isTalk=t;publish({t:"VC",n:myName,tk:t});updateVBar();}
+      requestAnimationFrame(vad);
+    }
+    vad();
+  }).catch(function(){setVS(false,"❌ মাইক অনুমতি দিন");});
+}
+
+function setVS(ok,msg){
+  var el=document.getElementById("vstat");
+  el.style.cssText="padding:8px;border-radius:8px;margin-bottom:8px;font-size:12px;"+(ok?"background:#0d2420;color:#00e5a0":"background:#1a0a0a;color:#ff8080");
+  el.textContent=(ok?"🎤 ":"🔇 ")+msg;
+}
+
+// ══ WebRTC ══
+var RTC={iceServers:[{urls:"stun:stun.l.google.com:19302"}]};
+function makePC(pid,init){
+  if(peerConns[pid])return peerConns[pid];
+  var pc=new RTCPeerConnection(RTC);
+  peerConns[pid]=pc;
+  if(lStream)lStream.getTracks().forEach(function(t){pc.addTrack(t,lStream);});
+  pc.ontrack=function(e){
+    var a=document.getElementById("aud-"+pid);
+    if(!a){a=document.createElement("audio");a.id="aud-"+pid;a.autoplay=true;a.style.display="none";document.body.appendChild(a);}
+    a.srcObject=e.streams[0];
+  };
+  pc.onicecandidate=function(e){if(e.candidate)publish({t:"IC",to:pid,fm:myName,c:JSON.stringify(e.candidate)});};
+  if(init){
+    pc.createOffer().then(function(o){return pc.setLocalDescription(o);})
+    .then(function(){publish({t:"OF",to:pid,fm:myName,s:JSON.stringify(pc.localDescription)});});
+  }
+  return pc;
+}
+
+// ══ ABLY ══
+function loadAbly(){
+  setLS("⏳ লোড হচ্ছে...");
+  if(window.Ably){connectAbly();return;}
+  var s=document.createElement("script");
+  s.src="https://cdn.ably.com/lib/ably.min-1.js";
+  s.onload=connectAbly;
+  s.onerror=function(){setLS("❌ ইন্টারনেট সমস্যা!");};
+  document.head.appendChild(s);
+}
+
+function connectAbly(){
+  var ably=new Ably.Realtime("xVLRHg.tNMEOg:Jkt3BsHSWVzFV_TjXGIFM6fCEiP7L1KnMhHiV3iFn7k");
+  ably.connection.on("connected",function(){
+    if(isHost){
+      rCode=Math.random().toString(36).substr(2,6).toUpperCase();
+      ch=ably.channels.get("fjr3-"+rCode);
+      ch.subscribe(onMsg);
+      document.getElementById("codeshow").style.display="block";
+      document.getElementById("codenum").textContent=rCode;
+      document.getElementById("startBtn").style.display="block";
+      setLS("✅ চালু! Code: "+rCode);
+      players=[{name:myName,jet:myJet,hp:JETS[JN[myJet]].hp,mhp:JETS[JN[myJet]].hp,sc:0,alive:true}];
+      updatePList();
+    } else {
+      ch=ably.channels.get("fjr3-"+jCode);
+      ch.subscribe(onMsg);
+      setLS("✅ সংযুক্ত!");
+      document.getElementById("waitmsg").style.display="block";
+      publish({t:"JN",name:myName,jet:myJet});
+    }
+  });
+  ably.connection.on("failed",function(){setLS("❌ সংযোগ ব্যর্থ!");});
+}
+
+function publish(d){if(ch)ch.publish("m",d);}
+function setLS(t){var el=document.getElementById("lstat");if(el)el.textContent=t;}
+
+function onMsg(msg){
+  var d=msg.data; if(!d||!d.t)return;
+  if(d.t==="OF"&&d.to===myName){var pc=makePC(d.fm,false);pc.setRemoteDescription(JSON.parse(d.s)).then(function(){return pc.createAnswer();}).then(function(a){return pc.setLocalDescription(a);}).then(function(){publish({t:"AN",to:d.fm,fm:myName,s:JSON.stringify(pc.localDescription)});});return;}
+  if(d.t==="AN"&&d.to===myName){if(peerConns[d.fm])peerConns[d.fm].setRemoteDescription(JSON.parse(d.s));return;}
+  if(d.t==="IC"&&d.to===myName){if(peerConns[d.fm])peerConns[d.fm].addIceCandidate(JSON.parse(d.c));return;}
+  if(d.t==="JN"&&d.name===myName)return;
+  if(d.n===myName&&(d.t==="ST"||d.t==="VC"))return;
+  if(d.t==="JN"&&isHost){
+    if(players.length>=3)return;
+    players.push({name:d.name,jet:d.jet,hp:JETS[JN[d.jet]].hp,mhp:JETS[JN[d.jet]].hp,sc:0,alive:true});
+    publish({t:"PL",players:players,mode:mode});
+    addLC("🔔",d.name+" যোগ দিয়েছে!");
+    updatePList();
+    setTimeout(function(){makePC(d.name,true);},600);
+  }
+  if(d.t==="PL"){players=d.players;if(d.mode)mode=d.mode;updatePList();}
+  if(d.t==="GO"){mode=d.mode;initGame(d.players,d.mode);showPg("gp");startLoop();}
+  if(d.t==="LC"){addLC(d.n,d.v);}
+  if(d.t==="GC"){if(d.n!==myName)addGC(d.n,d.v);}
+  if(d.t==="ST"){if(d.n!==myName)updateRemote(d);}
+  if(d.t==="OV"){showOver(d.res,d.sc);}
+  if(d.t==="VC"){whoTalk[d.n]=d.tk;updateVBar();}
+}
+
+function updatePList(){
+  var el=document.getElementById("playerlist");el.innerHTML="";
+  document.getElementById("pcnt").textContent="খেলোয়াড় ("+players.length+"/3)";
+  for(var i=0;i<players.length;i++){
+    var p=players[i],j=JETS[JN[p.jet]];
+    var d=document.createElement("div");d.className="prow";
+    d.innerHTML='<div style="width:9px;height:9px;border-radius:50%;background:'+j.c+'"></div><span style="flex:1">'+p.name+(i===0?" 👑":"")+'</span><span style="color:#00e5a0">🎤</span>';
+    el.appendChild(d);
+  }
+}
+
+function updateVBar(){
+  var el=document.getElementById("vbar");if(!el)return;el.innerHTML="";
+  for(var i=0;i<players.length;i++){
+    var p=players[i],tk=p.name===myName?isTalk:whoTalk[p.name];
+    var d=document.createElement("div");d.className="vi"+(tk?" tk":"");
+    d.innerHTML='<div class="vdot'+(tk?" on":"")+'"></div>'+p.name+(tk?" 🎤":" 🔇");
+    el.appendChild(d);
+  }
+  var ts=document.getElementById("tktxt");if(ts)ts.textContent=isTalk?"🎤":"🔇";
+}
+
+function addLC(n,t){var el=document.getElementById("lobbychat");var d=document.createElement("div");d.innerHTML="<b style='color:#4fc3f7'>"+n+":</b> "+t;el.appendChild(d);el.scrollTop=el.scrollHeight;}
+function sendLChat(){var inp=document.getElementById("lchatinp");var t=inp.value.trim();if(!t)return;addLC(myName,t);publish({t:"LC",n:myName,v:t});inp.value="";}
+function addGC(n,t){var el=document.getElementById("gfeed");if(el)el.textContent=n+": "+t;}
+function sendGChat(){var inp=document.getElementById("gcin");var t=inp.value.trim();if(!t)return;addGC(myName,t);publish({t:"GC",n:myName,v:t});inp.value="";}
+
+function startGame(){
+  publish({t:
